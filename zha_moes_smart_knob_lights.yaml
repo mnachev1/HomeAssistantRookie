@@ -1,0 +1,528 @@
+blueprint:
+  name: ZHA - Moes Smart Knob for lights
+  description: 'Control lights with a Moes Smart Knob.
+
+    You can set functions for a single press. This allows you to assign, 
+    e.g., a scene or anything else.
+
+    Rotating left/right will change the brightness smoothly of the selected light.'
+
+  domain: automation
+  input:
+    remote:
+      name: Remote
+      description: Moes Knob to use
+      selector:
+        device:
+          integration: zha
+          manufacturer: _TZ3000_4fjiwweb
+          model: TS004F
+    light:
+      name: Light(s)
+      description: The light(s) to control
+      selector:
+        target:
+          entity:
+            domain: light
+    single_press:
+      name: Single press
+      description: Action to run on single press
+      default: []
+      selector:
+        action: {}
+  source_url: https://gist.github.com/seamus65/0cd586edfee2e245e0b7e8081c5865f1
+mode: restart
+max_exceeded: silent
+trigger:
+- platform: event
+  event_type: zha_event
+  event_data:
+    device_id: !input 'remote'
+action:
+- variables:
+    command: '{{ trigger.event.data.command }}'
+    cluster_id: '{{ trigger.event.data.cluster_id }}'
+    endpoint_id: '{{ trigger.event.data.endpoint_id }}'
+    args: '{{ trigger.event.data.args }}'
+- choose:
+  - conditions:
+    - '{{ command == ''toggle'' }}'
+    - '{{ cluster_id == 6 }}'
+    - '{{ endpoint_id == 1 }}'
+    sequence: !input 'single_press'
+  - conditions:
+    - '{{ command == ''step'' }}'
+    - '{{ cluster_id == 8 }}'
+    - '{{ endpoint_id == 1 }}'
+    - '{{ args == [0, 13, 1] }}'
+    sequence:
+    - repeat:
+        while:
+        - condition: template
+          value_template: "{{ repeat.index < 2 }}"
+        sequence:
+        - service: light.turn_on
+          target: !input 'light'
+          data:
+            brightness_step_pct: 5
+            transition: 0.5
+        - delay: 0.1
+  - conditions:
+    - '{{ command == ''step'' }}'
+    - '{{ cluster_id == 8 }}'
+    - '{{ endpoint_id == 1 }}'
+    - '{{ args == [0, 25, 1] }}'
+    sequence:
+    - repeat:
+        while:
+        - condition: template
+          value_template: "{{ repeat.index < 3 }}"
+        sequence:
+        - service: light.turn_on
+          target: !input 'light'
+          data:
+            brightness_step_pct: 5
+            transition: 0.5
+        - delay: 0.1
+  - conditions:
+    - '{{ command == ''step'' }}'
+    - '{{ cluster_id == 8 }}'
+    - '{{ endpoint_id == 1 }}'
+    - '{{ args == [0, 37, 2] }}'
+    sequence:
+    - repeat:
+        while:
+        - condition: template
+          value_template: "{{ repeat.index < 5 }}"
+        sequence:
+        - service: light.turn_on
+          target: !input 'light'
+          data:
+            brightness_step_pct: 5
+            transition: 0.5
+        - delay: 0.1
+  - conditions:
+    - '{{ command == ''step'' }}'
+    - '{{ cluster_id == 8 }}'
+    - '{{ endpoint_id == 1 }}'
+    - '{{ args == [0, 49, 2] }}'
+    sequence:
+    - repeat:
+        while:
+        - condition: template
+          value_template: "{{ repeat.index < 3 }}"
+        sequence:
+        - service: light.turn_on
+          target: !input 'light'
+          data:
+            brightness_step_pct: 10
+            transition: 0.5
+        - delay: 0.1
+  - conditions:
+    - '{{ command == ''step'' }}'
+    - '{{ cluster_id == 8 }}'
+    - '{{ endpoint_id == 1 }}'
+    - '{{ args == [0, 61, 2] }}'
+    sequence:
+    - repeat:
+        while:
+        - condition: template
+          value_template: "{{ repeat.index < 5 }}"
+        sequence:
+        - service: light.turn_on
+          target: !input 'light'
+          data:
+            brightness_step_pct: 10
+            transition: 0.5
+        - delay: 0.1
+  - conditions:
+    - '{{ command == ''step'' }}'
+    - '{{ cluster_id == 8 }}'
+    - '{{ endpoint_id == 1 }}'
+    - '{{ args == [0, 73, 2] }}'
+    sequence:
+    - repeat:
+        while:
+        - condition: template
+          value_template: "{{ repeat.index < 10 }}"
+        sequence:
+        - service: light.turn_on
+          target: !input 'light'
+          data:
+            brightness_step_pct: 10
+            transition: 0.5
+        - delay: 0.1
+  - conditions:
+    - '{{ command == ''step'' }}'
+    - '{{ cluster_id == 8 }}'
+    - '{{ endpoint_id == 1 }}'
+    - '{{ args == [0, 85, 3] }}'
+    sequence:
+    - repeat:
+        while:
+        - condition: template
+          value_template: "{{ repeat.index < 10 }}"
+        sequence:
+        - service: light.turn_on
+          target: !input 'light'
+          data:
+            brightness_step_pct: 10
+            transition: 0.5
+        - delay: 0.1
+  - conditions:
+    - '{{ command == ''step'' }}'
+    - '{{ cluster_id == 8 }}'
+    - '{{ endpoint_id == 1 }}'
+    - '{{ args == [0, 97, 3] }}'
+    sequence:
+    - repeat:
+        while:
+        - condition: template
+          value_template: "{{ repeat.index < 10 }}"
+        sequence:
+        - service: light.turn_on
+          target: !input 'light'
+          data:
+            brightness_step_pct: 10
+            transition: 0.5
+        - delay: 0.1
+  - conditions:
+    - '{{ command == ''step'' }}'
+    - '{{ cluster_id == 8 }}'
+    - '{{ endpoint_id == 1 }}'
+    - '{{ args == [0, 109, 3] }}'
+    sequence:
+    - repeat:
+        while:
+        - condition: template
+          value_template: "{{ repeat.index < 10 }}"
+        sequence:
+        - service: light.turn_on
+          target: !input 'light'
+          data:
+            brightness_step_pct: 10
+            transition: 0.5
+        - delay: 0.1
+  - conditions:
+    - '{{ command == ''step'' }}'
+    - '{{ cluster_id == 8 }}'
+    - '{{ endpoint_id == 1 }}'
+    - '{{ args == [0, 121, 3] }}'
+    sequence:
+    - repeat:
+        while:
+        - condition: template
+          value_template: "{{ repeat.index < 10 }}"
+        sequence:
+        - service: light.turn_on
+          target: !input 'light'
+          data:
+            brightness_step_pct: 10
+            transition: 0.5
+        - delay: 0.1
+  - conditions:
+    - '{{ command == ''step'' }}'
+    - '{{ cluster_id == 8 }}'
+    - '{{ endpoint_id == 1 }}'
+    - '{{ args == [0, 133, 3] }}'
+    sequence:
+    - repeat:
+        while:
+        - condition: template
+          value_template: "{{ repeat.index < 10 }}"
+        sequence:
+        - service: light.turn_on
+          target: !input 'light'
+          data:
+            brightness_step_pct: 10
+            transition: 0.5
+        - delay: 0.1
+  - conditions:
+    - '{{ command == ''step'' }}'
+    - '{{ cluster_id == 8 }}'
+    - '{{ endpoint_id == 1 }}'
+    - '{{ args == [0, 145, 3] }}'
+    sequence:
+    - repeat:
+        while:
+        - condition: template
+          value_template: "{{ repeat.index < 10 }}"
+        sequence:
+        - service: light.turn_on
+          target: !input 'light'
+          data:
+            brightness_step_pct: 10
+            transition: 0.5
+        - delay: 0.1
+  - conditions:
+    - '{{ command == ''step'' }}'
+    - '{{ cluster_id == 8 }}'
+    - '{{ endpoint_id == 1 }}'
+    - '{{ args == [0, 157, 3] }}'
+    sequence:
+    - repeat:
+        while:
+        - condition: template
+          value_template: "{{ repeat.index < 10 }}"
+        sequence:
+        - service: light.turn_on
+          target: !input 'light'
+          data:
+            brightness_step_pct: 10
+            transition: 0.5
+        - delay: 0.1
+  - conditions:
+    - '{{ command == ''step'' }}'
+    - '{{ cluster_id == 8 }}'
+    - '{{ endpoint_id == 1 }}'
+    - '{{ args == [0, 169, 3] }}'
+    sequence:
+    - repeat:
+        while:
+        - condition: template
+          value_template: "{{ repeat.index < 10 }}"
+        sequence:
+        - service: light.turn_on
+          target: !input 'light'
+          data:
+            brightness_step_pct: 10
+            transition: 0.5
+        - delay: 0.1
+  - conditions:
+    - '{{ command == ''step'' }}'
+    - '{{ cluster_id == 8 }}'
+    - '{{ endpoint_id == 1 }}'
+    - '{{ args == [1, 13, 1] }}'
+    sequence:
+    - repeat:
+        while:
+        - condition: template
+          value_template: "{{ repeat.index < 2 }}"
+        sequence:
+        - service: light.turn_on
+          target: !input 'light'
+          data:
+            brightness_step_pct: -5
+            transition: 0.5
+        - delay: 0.1
+  - conditions:
+    - '{{ command == ''step'' }}'
+    - '{{ cluster_id == 8 }}'
+    - '{{ endpoint_id == 1 }}'
+    - '{{ args == [1, 25, 1] }}'
+    sequence:
+    - repeat:
+        while:
+        - condition: template
+          value_template: "{{ repeat.index < 3 }}"
+        sequence:
+        - service: light.turn_on
+          target: !input 'light'
+          data:
+            brightness_step_pct: -5
+            transition: 0.5
+        - delay: 0.1
+  - conditions:
+    - '{{ command == ''step'' }}'
+    - '{{ cluster_id == 8 }}'
+    - '{{ endpoint_id == 1 }}'
+    - '{{ args == [1, 37, 2] }}'
+    sequence:
+    - repeat:
+        while:
+        - condition: template
+          value_template: "{{ repeat.index < 5 }}"
+        sequence:
+        - service: light.turn_on
+          target: !input 'light'
+          data:
+            brightness_step_pct: -5
+            transition: 0.5
+        - delay: 0.1
+  - conditions:
+    - '{{ command == ''step'' }}'
+    - '{{ cluster_id == 8 }}'
+    - '{{ endpoint_id == 1 }}'
+    - '{{ args == [1, 49, 2] }}'
+    sequence:
+    - repeat:
+        while:
+        - condition: template
+          value_template: "{{ repeat.index < 3 }}"
+        sequence:
+        - service: light.turn_on
+          target: !input 'light'
+          data:
+            brightness_step_pct: -10
+            transition: 0.5
+        - delay: 0.1
+  - conditions:
+    - '{{ command == ''step'' }}'
+    - '{{ cluster_id == 8 }}'
+    - '{{ endpoint_id == 1 }}'
+    - '{{ args == [1, 61, 2] }}'
+    sequence:
+    - repeat:
+        while:
+        - condition: template
+          value_template: "{{ repeat.index < 5 }}"
+        sequence:
+        - service: light.turn_on
+          target: !input 'light'
+          data:
+            brightness_step_pct: -10
+            transition: 0.5
+        - delay: 0.1
+  - conditions:
+    - '{{ command == ''step'' }}'
+    - '{{ cluster_id == 8 }}'
+    - '{{ endpoint_id == 1 }}'
+    - '{{ args == [1, 73, 2] }}'
+    sequence:
+    - repeat:
+        while:
+        - condition: template
+          value_template: "{{ repeat.index < 10 }}"
+        sequence:
+        - service: light.turn_on
+          target: !input 'light'
+          data:
+            brightness_step_pct: -10
+            transition: 0.5
+        - delay: 0.1
+  - conditions:
+    - '{{ command == ''step'' }}'
+    - '{{ cluster_id == 8 }}'
+    - '{{ endpoint_id == 1 }}'
+    - '{{ args == [1, 85, 3] }}'
+    sequence:
+    - repeat:
+        while:
+        - condition: template
+          value_template: "{{ repeat.index < 10 }}"
+        sequence:
+        - service: light.turn_on
+          target: !input 'light'
+          data:
+            brightness_step_pct: -10
+            transition: 0.5
+        - delay: 0.1
+  - conditions:
+    - '{{ command == ''step'' }}'
+    - '{{ cluster_id == 8 }}'
+    - '{{ endpoint_id == 1 }}'
+    - '{{ args == [1, 97, 3] }}'
+    sequence:
+    - repeat:
+        while:
+        - condition: template
+          value_template: "{{ repeat.index < 10 }}"
+        sequence:
+        - service: light.turn_on
+          target: !input 'light'
+          data:
+            brightness_step_pct: -10
+            transition: 0.5
+        - delay: 0.1
+  - conditions:
+    - '{{ command == ''step'' }}'
+    - '{{ cluster_id == 8 }}'
+    - '{{ endpoint_id == 1 }}'
+    - '{{ args == [1, 109, 3] }}'
+    sequence:
+    - repeat:
+        while:
+        - condition: template
+          value_template: "{{ repeat.index < 10 }}"
+        sequence:
+        - service: light.turn_on
+          target: !input 'light'
+          data:
+            brightness_step_pct: -10
+            transition: 0.5
+        - delay: 0.1
+  - conditions:
+    - '{{ command == ''step'' }}'
+    - '{{ cluster_id == 8 }}'
+    - '{{ endpoint_id == 1 }}'
+    - '{{ args == [1, 121, 3] }}'
+    sequence:
+    - repeat:
+        while:
+        - condition: template
+          value_template: "{{ repeat.index < 10 }}"
+        sequence:
+        - service: light.turn_on
+          target: !input 'light'
+          data:
+            brightness_step_pct: -10
+            transition: 0.5
+        - delay: 0.1
+  - conditions:
+    - '{{ command == ''step'' }}'
+    - '{{ cluster_id == 8 }}'
+    - '{{ endpoint_id == 1 }}'
+    - '{{ args == [1, 133, 3] }}'
+    sequence:
+    - repeat:
+        while:
+        - condition: template
+          value_template: "{{ repeat.index < 10 }}"
+        sequence:
+        - service: light.turn_on
+          target: !input 'light'
+          data:
+            brightness_step_pct: -10
+            transition: 0.5
+        - delay: 0.1
+  - conditions:
+    - '{{ command == ''step'' }}'
+    - '{{ cluster_id == 8 }}'
+    - '{{ endpoint_id == 1 }}'
+    - '{{ args == [1, 145, 3] }}'
+    sequence:
+    - repeat:
+        while:
+        - condition: template
+          value_template: "{{ repeat.index < 10 }}"
+        sequence:
+        - service: light.turn_on
+          target: !input 'light'
+          data:
+            brightness_step_pct: -10
+            transition: 0.5
+        - delay: 0.1
+  - conditions:
+    - '{{ command == ''step'' }}'
+    - '{{ cluster_id == 8 }}'
+    - '{{ endpoint_id == 1 }}'
+    - '{{ args == [1, 157, 3] }}'
+    sequence:
+    - repeat:
+        while:
+        - condition: template
+          value_template: "{{ repeat.index < 10 }}"
+        sequence:
+        - service: light.turn_on
+          target: !input 'light'
+          data:
+            brightness_step_pct: -10
+            transition: 0.5
+        - delay: 0.1
+  - conditions:
+    - '{{ command == ''step'' }}'
+    - '{{ cluster_id == 8 }}'
+    - '{{ endpoint_id == 1 }}'
+    - '{{ args == [1, 169, 3] }}'
+    sequence:
+    - repeat:
+        while:
+        - condition: template
+          value_template: "{{ repeat.index < 10 }}"
+        sequence:
+        - service: light.turn_on
+          target: !input 'light'
+          data:
+            brightness_step_pct: -10
+            transition: 0.5
+        - delay: 0.1
