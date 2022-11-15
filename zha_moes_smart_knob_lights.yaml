@@ -47,7 +47,7 @@ blueprint:
             domain: light
     press_step_percent:
       name: Pressed light step
-      description: Light pecent change for each knob step
+      description: Light pecent change for each knob step when pressed
       selector:
         number:
           mode: slider
