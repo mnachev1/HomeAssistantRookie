@@ -8,7 +8,7 @@ blueprint:
     press, long press and press and rotate.
     
     Original blueprint by: seamus65 (https://gist.github.com/seamus65/939a147634942dd885c8704334627f93).
-    Improved by: GonzaloAlbito (https://gist.github.com/gonzaloalbito/67a1e51d16e939aa4548180fd3a739ec).
+    Improved by: GonzaloAlbito (https://gist.github.com/gonzaloalbito/3dc06702e941e08298ea9bfade731731).
     Version: 2022-11-15'
   domain: automation
   input:
@@ -61,7 +61,7 @@ blueprint:
       default: []
       selector:
         action: {}
-  source_url: https://gist.github.com/gonzaloalbito/67a1e51d16e939aa4548180fd3a739ec
+  source_url: https://gist.github.com/gonzaloalbito/3dc06702e941e08298ea9bfade731731
 mode: restart
 max_exceeded: silent
 trigger:
