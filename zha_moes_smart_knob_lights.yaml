@@ -7,11 +7,11 @@ blueprint:
     Not all functionality of the device is available at time of writing, e.g. double
     press, long press and press and rotate.
 
-    Original blueprint by: seamus65 (https://gist.github.com/seamus65/939a147634942dd885c8704334627f93).
+    Original blueprint by seamus65 (https://gist.github.com/seamus65/939a147634942dd885c8704334627f93).
 
-    Improved by: GonzaloAlbito (https://gist.github.com/gonzaloalbito/3dc06702e941e08298ea9bfade731731).
+    Improved by GonzaloAlbito (https://gist.github.com/gonzaloalbito/3dc06702e941e08298ea9bfade731731).
 
-    Version: 2022-11-15.'
+    Version 2022-11-15.'
   domain: automation
   input:
     remote:
