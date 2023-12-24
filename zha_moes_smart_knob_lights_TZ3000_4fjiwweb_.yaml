@@ -11,7 +11,9 @@ blueprint:
 
     Improved by GonzaloAlbito (https://gist.github.com/gonzaloalbito/3dc06702e941e08298ea9bfade731731).
 
-    Version 2022-11-15.'
+    Changed manufacturer code to _TZ3000_4fjiwweb (later version since Gonzalo posted his one).
+
+    Version 2023-12-24'
   domain: automation
   input:
     remote:
